@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Purna Shah - Portfolio</title>
+<meta name="description" content="Purna Shah — Computer Science student at RIT, passionate about Data Science, Machine Learning & Deep Learning. Seeking internship opportunities."/>
+<meta name="keywords" content="Purna Shah, Data Science, Machine Learning, Python, Portfolio, RIT, Internship"/>
+<meta property="og:title" content="Purna Shah - Portfolio"/>
+<meta property="og:description" content="CS student passionate about ML, Data Analysis, and building impactful solutions."/>
+<meta property="og:type" content="website"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Manrope:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
+
+<!-- ===== CSS (modular) ===== -->
+<link rel="stylesheet" href="css/main.css"/>
+<link rel="stylesheet" href="css/animations.css"/>
+<link rel="stylesheet" href="css/components/navbar.css"/>
+<link rel="stylesheet" href="css/components/hero.css"/>
+<link rel="stylesheet" href="css/components/about.css"/>
+<link rel="stylesheet" href="css/components/skills.css"/>
+<link rel="stylesheet" href="css/components/projects.css"/>
+<link rel="stylesheet" href="css/components/experience.css"/>
+<link rel="stylesheet" href="css/components/education.css"/>
+<link rel="stylesheet" href="css/components/certificates.css"/>
+<link rel="stylesheet" href="css/components/art-gallery.css"/>
+<link rel="stylesheet" href="css/components/contact.css"/>
+<link rel="stylesheet" href="css/components/footer.css"/>
+<link rel="stylesheet" href="css/responsive.css"/>
+
+<!-- Firebase SDK Import Map for native browser ES modules -->
+<script type="importmap">
+{
+  "imports": {
+    "firebase/app": "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js",
+    "firebase/analytics": "https://www.gstatic.com/firebasejs/10.12.0/firebase-analytics.js",
+    "firebase/firestore": "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js",
+    "firebase/storage": "https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js"
+  }
+}
+</script>
+</head>
+<body>
+
+
+<!-- ── SCROLL PROGRESS ──────────────────────────────────── -->
+<div id="scroll-bar"></div>
+
+<!-- ── SCROLL TO TOP ────────────────────────────────────── -->
+<button id="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Scroll to top">↑</button>
+
+<!-- ── TOAST ────────────────────────────────────────────── -->
+<div id="toast"></div>
+
+<!-- ═══════════════════════════════════════════════════════
+     NAV
+════════════════════════════════════════════════════════ -->
+
+<nav>
+
+  <a class="nav-logo" href="#hero">Purna Shah</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="theme-btn" onclick="toggleTheme()" id="theme-icon" aria-label="Toggle theme">🌙</button>
+    <a class="nav-hire" href="#contact">Open to Internship</a>
+  </div>
+
+</nav>
+
+<!-- ═══════════════════════════════════════════════════════
+     HERO
+════════════════════════════════════════════════════════ -->
+<section id="hero">
+
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+  <div class="hero-grid">
+    <!-- left -->
+    <div class="hero-left">
+      <div class="hero-kicker">
+        <span class="kicker-dot"></span>
+        Actively Seeking Data Science Internship · 2025
+      </div>
+      <h1 class="hero-name">
+        Hello, I'm<br>
+        <span class="grad">Purna Shah</span>
+      </h1>
+      <div class="hero-roles">
+        <div class="hero-roles-inner">
+          <div>Data Science Enthusiast</div>
+          <div>Computer Science Student</div>
+          <div>Machine Learning Explorer</div>
+          <div>Data Analyst Enthusiast</div>
+          <div>Python Developer</div>
+          <div>Data Science Enthusiast</div>
+        </div>
+      </div>
+      <p class="hero-desc">
+        Computer Science student at <strong>Rajarambapu Institute of Technology</strong>
+        with a strong foundation in <strong>Python, SQL, and statistics</strong>.
+        I enjoy hunting for the "why" hidden behind every data point.
+      </p>
+      <div class="hero-btns">
+        <a class="btn-primary" href="#projects">View Projects</a>
+        <a class="btn-secondary" href="https://github.com/PurnaShah24" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a class="btn-secondary" href="https://linkedin.com/in/purna-shah-6553282b1" target="_blank">LinkedIn</a>
+        <a class="btn-secondary" href="assets/resume/Purna_Shah_Resume_data.pdf.pdf" target="_blank" rel="noopener noreferrer" id="resume-link">Resume ↓</a>
+      </div>
+      <div class="hero-stats">
+        <div class="h-stat"><div class="h-stat-n">3+</div><div class="h-stat-l">Projects</div></div>
+        <div class="h-stat"><div class="h-stat-n">2+</div><div class="h-stat-l">Certifications</div></div>
+        <div class="h-stat"><div class="h-stat-n">80+</div><div class="h-stat-l">Events Managed</div></div>
+        <div class="h-stat"><div class="h-stat-n">5+</div><div class="h-stat-l">Languages Spoken</div></div>
+      </div>
+    </div>
+    <!-- right -->
+    <div class="hero-visual">
+      <div class="photo-frame">
+        <div class="photo-ring"><div class="photo-ring-inner"></div></div>
+        <img class="photo-img" src="assets/images/profile/profile.jpg" alt="Purna Shah" loading="eager"/>
+        <div class="float-card fc1">
+          <div class="fc-icon">🐍</div>
+          <div class="fc-label">Primary Language</div>
+          <div class="fc-val">Python</div>
+        </div>
+        <div class="float-card fc2">
+          <div class="fc-icon">🤖</div>
+          <div class="fc-label">Focus Area</div>
+          <div class="fc-val">ML / AI</div>
+        </div>
+        <div class="float-card fc3">
+          <div class="fc-icon">📊</div>
+          <div class="fc-label">Status</div>
+          <div class="fc-val" style="color:#4ade80">Open</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     ABOUT
+════════════════════════════════════════════════════════ -->
+<section id="about">
+
+  <div class="section-inner">
+    <div class="s-label">01 — About</div>
+    <h2 class="s-title">The mind <em>behind the models</em></h2>
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p>I'm <strong>Purna Shah</strong>, a Computer Science & Engineering student at Rajarambapu Institute of Technology, Maharashtra. My fascination with data science began when I realized that data isn't just numbers — it's stories waiting to be told.</p>
+        <p>With hands-on experience in <strong>data preprocessing, statistical analysis, database management, and machine learning</strong>, I've built end-to-end pipelines, designed multi-modal ML frameworks, and uncovered real business insights from raw datasets.</p>
+        <p>Beyond the technical side, I lead and coordinate college events as <strong>Non-Technical Head of the Oyster Kode Club</strong>, where I've built strong communication, teamwork, and leadership skills.</p>
+        <div class="goal-box">
+          <p>🎯 My goal is to join a data-driven team where I can apply and grow my machine learning and analytics skills on real-world problems — contributing to solutions that genuinely matter.</p>
+        </div>
+        <div class="skills-chips">
+          <span class="chip hi">Machine Learning</span>
+          <span class="chip hi">Data Analysis</span>
+          <span class="chip hi">Python</span>
+          <span class="chip">SQL</span>
+          <span class="chip">Pandas</span>
+          <span class="chip">Statistics</span>
+          <span class="chip">Event Management</span>
+          <span class="chip">Leadership</span>
+          <span class="chip">Git & GitHub</span>
+        </div>
+      </div>
+      <div class="reveal" data-delay="2">
+        <div class="stat-grid">
+          <div class="stat-card">
+            <div class="stat-number" data-target="3">0</div>
+            <div class="stat-desc">Projects Built</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number" data-target="2">0</div>
+            <div class="stat-desc">Certifications</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number" data-target="5">0</div>
+            <div class="stat-desc">Events Coordinated</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     SKILLS
+════════════════════════════════════════════════════════ -->
+<section id="skills">
+
+  <div class="section-inner">
+    <div class="s-label">02 — Skills</div>
+    <h2 class="s-title">Technical <em>toolkit</em></h2>
+    <div class="skills-layout">
+      <div class="reveal">
+        <div class="skill-cat-title">Programming Languages</div>
+        <div class="skill-row">
+          <div class="skill-name">Python</div>
+          <div class="skill-track"><div class="skill-fill" data-w="90"></div></div>
+          <div class="skill-pct">90%</div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-name">SQL</div>
+          <div class="skill-track"><div class="skill-fill" data-w="82"></div></div>
+          <div class="skill-pct">82%</div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-name">C</div>
+          <div class="skill-track"><div class="skill-fill" data-w="70"></div></div>
+          <div class="skill-pct">70%</div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-name">Java</div>
+          <div class="skill-track"><div class="skill-fill" data-w="65"></div></div>
+          <div class="skill-pct">65%</div>
+        </div>
+
+        <div class="skill-cat-title" style="margin-top:2rem;">Data Science & ML</div>
+        <div class="skill-row">
+          <div class="skill-name">Pandas / NumPy</div>
+          <div class="skill-track"><div class="skill-fill" data-w="87"></div></div>
+          <div class="skill-pct">87%</div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-name">Matplotlib</div>
+          <div class="skill-track"><div class="skill-fill" data-w="83"></div></div>
+          <div class="skill-pct">83%</div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-name">Scikit-learn</div>
+          <div class="skill-track"><div class="skill-fill" data-w="75"></div></div>
+          <div class="skill-pct">75%</div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-name">Statistics</div>
+          <div class="skill-track"><div class="skill-fill" data-w="78"></div></div>
+          <div class="skill-pct">78%</div>
+        </div>
+      </div>
+
+      <div class="reveal" data-delay="2">
+        <div class="skill-cat-title">Tools & Platforms</div>
+        <div class="tools-grid">
+          <div class="tool-pill"><span class="tool-icon">🐙</span>Git & GitHub</div>
+          <div class="tool-pill"><span class="tool-icon">📓</span>Jupyter</div>
+          <div class="tool-pill"><span class="tool-icon">💻</span>VS Code</div>
+          <div class="tool-pill"><span class="tool-icon">🗄️</span>MySQL</div>
+          <div class="tool-pill"><span class="tool-icon">📊</span>Excel</div>
+          <div class="tool-pill"><span class="tool-icon">☁️</span>Google Colab</div>
+          <div class="tool-pill"><span class="tool-icon">🐍</span>PyCharm</div>
+          <div class="tool-pill"><span class="tool-icon">🤗</span>Kaggle</div>
+          <div class="tool-pill"><span class="tool-icon">🏗️</span>JDBC</div>
+        </div>
+
+        <div class="skill-cat-title" style="margin-top:2rem;">Soft Skills</div>
+        <div class="soft-grid">
+          <a class="soft-card" href="https://www.linkedin.com/posts/purnashah24_cmarathon-stringsinc-oysterkodeclub-activity-7410639238695706624-ABHp?utm_source=social_share_send&utm_medium=android_app&rcm=ACoAAEr6D6EBtbNZOrg254Fpvh5Im97aXS-nb04&utm_campaign=copy_link" target="_blank" rel="noopener noreferrer">🗣️ Presentation</a>
+          <div class="soft-card">👥 Leadership</div>
+          <div class="soft-card">🤝 Teamwork</div>
+          <div class="soft-card">🎪 Event Management</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     PROJECTS
+════════════════════════════════════════════════════════ -->
+<section id="projects">
+
+  <div class="section-inner">
+    <div class="s-label">03 — Projects</div>
+    <h2 class="s-title">Work that <em>speaks in data</em></h2>
+    <div class="proj-grid" id="proj-grid">
+      <!-- Rendered by js/projects.js: Firestore "projects" collection,
+           falls back to data/projects.js -->
+    </div>
+  </div>
+
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     EXPERIENCE
+════════════════════════════════════════════════════════ -->
+<section id="experience">
+
+  <div class="section-inner">
+    <div class="s-label">04 — Experience & Leadership</div>
+    <h2 class="s-title">Where I've <em>grown</em></h2>
+    <div class="timeline reveal">
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">Jun 2025 – Jul 2025</div>
+        <div class="tl-role">Python Programming Intern</div>
+        <div class="tl-org">CodSoft</div>
+        <ul class="tl-points">
+          <li>Developed 3 Python applications — To-Do List, Calculator, and Rock-Paper-Scissors — applying OOP, file handling, and the random module.</li>
+          <li>Strengthened core programming fundamentals through hands-on implementation of functions and object-oriented design principles.</li>
+        </ul>
+         <div class="tl-links">
+          <a href="https://github.com/PurnaShah24/CodSoft" target="_blank" rel="noopener noreferrer">GitHub Repo</a>
+          
+        </div>
+            </div>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">2023 – Present</div>
+        <div class="tl-role">Non-Technical Head</div>
+        <div class="tl-org">Oyster Kode Club, Rajarambapu Institute of Technology</div>
+        <ul class="tl-points">
+          <li>Coordinated 5+ college-wide events and technical competitions for 80+ attendees.</li>
+          <li>Ran weekly activities to build communication and teamwork skills among junior club members.</li>
+          <li>Developed leadership, event planning, and cross-team collaboration skills in a live environment.</li>
+        </ul>
+        <div class="tl-links">
+          <a href="https://github.com/PurnaShah24" target="_blank" rel="noopener noreferrer">GitHub profile</a>
+          <a href="https://www.linkedin.com/posts/oyster-kode-club_oysterkode-5thgen-leadershipteam-activity-7353029591550062592-KwnM?utm_source=share&utm_medium=member_android&rcm=ACoAAEr6D6EBtbNZOrg254Fpvh5Im97aXS-nb04" target="_blank" rel="noopener noreferrer">LinkedIn post</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     EDUCATION
+════════════════════════════════════════════════════════ -->
+<section id="education">
+
+  <div class="section-inner">
+    <div class="s-label">05 — Education</div>
+    <h2 class="s-title">Academic <em>journey</em></h2>
+    <div class="edu-cards">
+      <div class="edu-card reveal">
+        <div class="edu-icon">🎓</div>
+        <div class="edu-year">Aug 2023 – May 2027</div>
+        <div class="edu-deg">B.Tech — Computer Science & Engineering</div>
+        <div class="edu-inst">Rajarambapu Institute of Technology, Maharashtra</div>
+      </div>
+      <div class="edu-card reveal" data-delay="1">
+        <div class="edu-icon">📚</div>
+        <div class="edu-year">Jun 2022 – Mar 2023</div>
+        <div class="edu-deg">Higher Secondary Certificate (H.S.C.)</div>
+        <div class="edu-inst">V.R.D. Junior College of Science</div>
+      </div>
+      <div class="edu-card reveal" data-delay="2">
+        <div class="edu-icon">🏫</div>
+        <div class="edu-year">Jun 2020 – Mar 2021</div>
+        <div class="edu-deg">Secondary School Certificate (S.S.C.)</div>
+        <div class="edu-inst">K.K. Gulavani Higher Secondary School</div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     CERTIFICATIONS
+════════════════════════════════════════════════════════ -->
+<section id="certs">
+
+  <div class="section-inner">
+    <div class="s-label">06 — Certifications</div>
+    <h2 class="s-title">Learning <em>credentials</em></h2>
+    <div class="cert-grid" id="cert-grid">
+      <!-- Rendered by js/certificates.js: Firestore "certificates" collection,
+           falls back to data/certificates.js -->
+    </div>
+  </div>
+
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     LANGUAGES
+════════════════════════════════════════════════════════ -->
+<section id="languages">
+
+  <div class="section-inner">
+    <div class="s-label">07 — Languages</div>
+    <h2 class="s-title">Languages I <em>speak</em></h2>
+    <div class="lang-grid">
+      <div class="lang-card reveal">
+        <div class="lang-name">English</div>
+        <div class="lang-level">Professional Working</div>
+        <div class="lang-dots">
+          <div class="lang-dot on"></div><div class="lang-dot on"></div>
+          <div class="lang-dot on"></div><div class="lang-dot on"></div><div class="lang-dot"></div>
+        </div>
+      </div>
+      <div class="lang-card reveal" data-delay="1">
+        <div class="lang-name">Hindi</div>
+        <div class="lang-level">Native / Bilingual</div>
+        <div class="lang-dots">
+          <div class="lang-dot on"></div><div class="lang-dot on"></div>
+          <div class="lang-dot on"></div><div class="lang-dot on"></div><div class="lang-dot on"></div>
+        </div>
+      </div>
+      <div class="lang-card reveal" data-delay="1">
+        <div class="lang-name">Marathi</div>
+        <div class="lang-level">Native / Bilingual</div>
+        <div class="lang-dots">
+          <div class="lang-dot on"></div><div class="lang-dot on"></div>
+          <div class="lang-dot on"></div><div class="lang-dot on"></div><div class="lang-dot on"></div>
+        </div>
+      </div>
+      <div class="lang-card reveal" data-delay="2">
+        <div class="lang-name">Gujarati</div>
+        <div class="lang-level">Professional Working</div>
+        <div class="lang-dots">
+          <div class="lang-dot on"></div><div class="lang-dot on"></div>
+          <div class="lang-dot on"></div><div class="lang-dot on"></div><div class="lang-dot"></div>
+        </div>
+      </div>
+      <div class="lang-card reveal" data-delay="3">
+        <div class="lang-name">Spanish</div>
+        <div class="lang-level">Elementary</div>
+        <div class="lang-dots">
+          <div class="lang-dot on"></div><div class="lang-dot on"></div>
+          <div class="lang-dot"></div><div class="lang-dot"></div><div class="lang-dot"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     CREATIVE CORNER / ART_BOX_24
+════════════════════════════════════════════════════════ -->
+<section id="creative">
+
+  <div class="section-inner">
+    <div class="s-label">08 — Creative Corner</div>
+    <h2 class="s-title">Beyond the <em>code</em></h2>
+    <div class="creative-inner reveal">
+      <p style="color:var(--sub);font-size:.95rem;max-width:600px;margin:0 auto 1rem;">
+        I'm not just about data — I'm also a creative. I share sketches, drawings, and digital art 
+        on my art Instagram account <strong style="color:var(--cyan)">@art_box_24</strong>. 
+        Art and data science have more in common than you'd think: both are about seeing patterns 
+        others miss.
+      </p>
+      <div class="art-preview">
+        <div class="art-block">🎨</div>
+        <div class="art-block">✏️</div>
+        <div class="art-block">🖼️</div>
+        <div class="art-block">🎭</div>
+        <div class="art-block">🌸</div>
+      </div>
+      <a class="insta-btn" href="https://www.instagram.com/art_box_24" target="_blank">
+        📷 Visit my Art World @art_box_24
+      </a>
+    </div>
+  </div>
+
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     GITHUB
+════════════════════════════════════════════════════════ -->
+<section id="github">
+
+  <div class="section-inner">
+    <div class="s-label">08 — GitHub</div>
+    <h2 class="s-title">Open source <em>presence</em></h2>
+    <div class="github-card reveal">
+      <div class="gh-username">PurnaShah24</div>
+      <div class="gh-bio">CS student · Python · Data Science · ML</div>
+      <div class="gh-stats">
+        <div>
+          <div class="gh-stat-n">3+</div>
+          <div class="gh-stat-l">Repositories</div>
+        </div>
+        <div>
+          <div class="gh-stat-n">Active</div>
+          <div class="gh-stat-l">Status</div>
+        </div>
+        <div>
+          <div class="gh-stat-n">Python</div>
+          <div class="gh-stat-l">Top Language</div>
+        </div>
+      </div>
+      <!-- Contribution visual -->
+      <div class="gh-contrib" id="gh-contrib-grid" style="margin-bottom:1.5rem;gap:2px;max-width:700px;margin-left:auto;margin-right:auto;"></div>
+      <a class="gh-btn" href="https://github.com/PurnaShah24" target="_blank">
+        🐙 Visit GitHub Profile
+      </a>
+    </div>
+  </div>
+
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     CONTACT
+════════════════════════════════════════════════════════ -->
+<section id="contact">
+
+  <div class="section-inner">
+    <div class="s-label">09 — Contact</div>
+    <h2 class="s-title">Let's build something <em>together</em></h2>
+    <div class="contact-grid">
+      <div class="reveal">
+        <div class="contact-card">
+          <p>I'm actively looking for a <strong>Data Science or Machine Learning internship</strong> starting 2025. If you're working on interesting data problems, I'd love to contribute to your team.</p>
+          <div class="c-links">
+            <a class="c-link" href="mailto:purnashah24@gmail.com">
+              <span class="c-link-icon">✉️</span> purnashah24@gmail.com
+            </a>
+            <a class="c-link" href="tel:+918766099556">
+              <span class="c-link-icon">📞</span> +91 8766099556
+            </a>
+            <a class="c-link" href="https://linkedin.com/in/purna-shah-6553282b1" target="_blank">
+              <span class="c-link-icon">💼</span> linkedin.com/in/purna-shah-6553282b1
+            </a>
+            <a class="c-link" href="https://github.com/PurnaShah24" target="_blank">
+              <span class="c-link-icon">🐙</span> github.com/PurnaShah24
+            </a>
+            <a class="c-link" href="https://www.instagram.com/art_box_24" target="_blank">
+              <span class="c-link-icon">🎨</span> @art_box_24 (Art)
+            </a>
+            <a class="c-link" href="#">
+              <span class="c-link-icon">📍</span> Maharashtra, India
+            </a>
+          </div>
+        </div>
+      </div>
+      <form class="contact-form reveal" id="cform" onsubmit="return false;" data-delay="2">
+        <div class="form-grid-2">
+          <div class="fg"><label for="fn">Your Name</label><input type="text" id="fn" placeholder="Recruiter Name"/></div>
+          <div class="fg"><label for="fe">Email</label><input type="email" id="fe" placeholder="you@company.com"/></div>
+        </div>
+        <div class="fg"><label for="fc">Company</label><input type="text" id="fc" placeholder="Company / Organisation"/></div>
+        <div class="fg"><label for="fm">Message</label><textarea id="fm" placeholder="Tell me about the internship opportunity or project..."></textarea></div>
+        <button class="cf-btn" id="cbtn" onclick="submitForm()">Send Message →</button>
+        <div class="cf-status" id="cstatus"></div>
+      </form>
+    </div>
+  </div>
+
+</section>
+
+<footer>
+
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Purna Shah</div>
+      <p style="margin-top:.3rem">Data Science Student · Maharashtra, India</p>
+    </div>
+    <p>© 2025 Purna Shah · Crafted with 💙 &amp; Python</p>
+    <div class="footer-links">
+      <a href="https://linkedin.com/in/purna-shah-6553282b1" target="_blank">LinkedIn</a>
+      <a href="https://github.com/PurnaShah24" target="_blank">GitHub</a>
+      <a href="mailto:purnashah24@gmail.com">Email</a>
+      <a href="https://www.instagram.com/art_box_24" target="_blank">Art IG</a>
+    </div>
+  </div>
+
+</footer>
+
+<!-- LOADER -->
+<div id="loader">
+  <div class="loader-logo">Purna Shah</div>
+  <div class="loader-bar-track"><div class="loader-bar-fill" id="lbar"></div></div>
+  <div class="loader-pct" id="lpct">0%</div>
+</div>
+
+<!-- PARTICLES -->
+<canvas id="particles-canvas"></canvas>
+
+<!-- MOBILE MENU -->
+<button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
+  <span></span><span></span><span></span>
+</button>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#about" onclick="toggleMenu()">About</a>
+  <a href="#skills" onclick="toggleMenu()">Skills</a>
+  <a href="#projects" onclick="toggleMenu()">Projects</a>
+  <a href="#experience" onclick="toggleMenu()">Experience</a>
+  <a href="#contact" onclick="toggleMenu()">Contact</a>
+</div>
+
+<!-- ===== JS (module entry point — imports everything else) ===== -->
+<script type="module" src="js/main.js"></script>
+</body>
+</html>

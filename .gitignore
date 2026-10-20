@@ -1,0 +1,21 @@
+# Dependencies (none required — plain HTML/CSS/JS, no npm build step)
+node_modules/
+
+# Environment / secrets
+.env
+.env.local
+firebase-debug.log
+.firebase/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+
+# Local resume file (add your own; kept out of git if it contains
+# personal data you don't want committed — remove this line if you
+# DO want to track it)
+# assets/resume/resume.pdf

@@ -1,0 +1,26 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+
+    function isAdmin() {
+      return request.auth != null && (
+        request.auth.token.email.lower() == "purnashah24@gmail.com"
+      );
+    }
+
+    // Public read for portfolio images and certificate badges/PDFs
+    match /{allPaths=**} {
+      allow read: if true;
+
+      // Only authorized admin can upload, modify or delete files
+      // Size limit: 10MB
+      // Allowed types: images (image/*) and PDF documents (application/pdf)
+      allow write: if isAdmin()
+                   && request.resource.size < 10 * 1024 * 1024
+                   && (request.resource.contentType.matches('image/.*')
+                       || request.resource.contentType == 'application/pdf');
+
+      allow delete: if isAdmin();
+    }
+  }
+}

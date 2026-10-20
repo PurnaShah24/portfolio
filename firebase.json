@@ -1,0 +1,24 @@
+{
+  "hosting": {
+    "public": ".",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**",
+      "_backup_pre_admin/**"
+    ],
+    "rewrites": [
+      {
+        "source": "/admin",
+        "destination": "/admin.html"
+      },
+      {
+        "source": "/admin/**",
+        "destination": "/admin.html"
+      }
+    ]
+  },
+  "firestore": {
+    "rules": "firestore.rules"
+  }
+}

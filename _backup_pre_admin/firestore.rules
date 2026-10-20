@@ -1,0 +1,32 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Contact form submissions:
+    // Any visitor can submit a contact message
+    // Only authenticated admins / Firebase Console can read or delete messages
+    match /messages/{messageId} {
+      allow create: if request.resource.data.name is string
+                    && request.resource.data.name.size() > 0
+                    && request.resource.data.email is string
+                    && request.resource.data.email.size() > 0
+                    && request.resource.data.message is string
+                    && request.resource.data.message.size() > 0;
+      allow read, update, delete: if false;
+    }
+
+    // Projects:
+    // Public read access so portfolio displays your projects
+    match /projects/{projectId} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    // Certificates:
+    // Public read access so portfolio displays your certificates
+    match /certificates/{certificateId} {
+      allow read: if true;
+      allow write: if false;
+    }
+  }
+}

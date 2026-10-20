@@ -1,0 +1,17 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    
+    // Certificate badges and documents (public read)
+    match /certificates/{allPaths=**} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    // Art gallery uploads (public read)
+    match /art/{allPaths=**} {
+      allow read: if true;
+      allow write: if false;
+    }
+  }
+}

@@ -1,0 +1,52 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Only your admin email can edit content and view private messages
+    function isAdmin() {
+      return request.auth != null && request.auth.token.email.lower() == "purnashah24@gmail.com";
+    }
+
+    // Public portfolio content (Anyone can view, only admin can edit)
+    match /profile/{docId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+    match /skills/{docId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+    match /projects/{projectId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+    match /certificates/{certId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+    match /experience/{expId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+    match /education/{eduId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+    match /languages/{langId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+    match /art/{artId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Contact inquiries (Public can send a message, only admin can read/delete)
+    match /messages/{messageId} {
+      allow create: if request.resource.data.name is string
+                    && request.resource.data.email is string
+                    && request.resource.data.message is string;
+      allow read, update, delete: if isAdmin();
+    }
+  }
+}

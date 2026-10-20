@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Dashboard · Purna Shah Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Manrope:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/admin.css"/>
+
+  <!-- Firebase SDK Import Map for native browser ES modules -->
+  <script type="importmap">
+  {
+    "imports": {
+      "firebase/app": "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js",
+      "firebase/auth": "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js",
+      "firebase/analytics": "https://www.gstatic.com/firebasejs/10.12.0/firebase-analytics.js",
+      "firebase/firestore": "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js",
+      "firebase/storage": "https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js"
+    }
+  }
+  </script>
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════════════════
+       1. AUTH / LOGIN OVERLAY
+  ════════════════════════════════════════════════════════ -->
+  <div id="auth-overlay">
+    <div class="auth-card">
+      <div class="auth-logo">Purna Shah</div>
+      <div class="auth-subtitle">Portfolio Content Management Console</div>
+      
+      <div id="auth-alert" class="auth-alert"></div>
+
+      <form id="login-form">
+        <div class="form-group">
+          <label class="form-label" for="login-email">Admin Email</label>
+          <input type="email" id="login-email" class="form-input" placeholder="purnashah24@gmail.com" required autocomplete="username"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="login-password">Password</label>
+          <input type="password" id="login-password" class="form-input" placeholder="••••••••••••" required autocomplete="current-password"/>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;font-size:0.85rem;">
+          <label style="display:flex;align-items:center;gap:0.4rem;cursor:pointer;color:var(--text-sub);">
+            <input type="checkbox" id="login-remember" checked/> Remember me
+          </label>
+          <a href="#" id="forgot-password-link" style="color:var(--cyan);text-decoration:none;">Forgot password?</a>
+        </div>
+        <button type="submit" id="login-btn" class="btn btn-primary" style="width:100%;">
+          <span>Sign In to Dashboard →</span>
+        </button>
+      </form>
+      <div style="margin-top:1.5rem;text-align:center;font-size:0.8rem;color:var(--text-dim);">
+        Protected area. Authorized administrator access only.
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════
+       2. ADMIN APP SHELL
+  ════════════════════════════════════════════════════════ -->
+  <div id="admin-app">
+    <!-- Sidebar -->
+    <aside class="admin-sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <a href="index.html" class="sidebar-brand">Purna Shah</a>
+        <span class="sidebar-badge">Admin</span>
+      </div>
+
+      <ul class="sidebar-menu">
+        <div class="menu-heading">Main</div>
+        <li>
+          <a class="nav-item active" data-tab="overview">
+            <span class="icon">📊</span>
+            <span>Overview</span>
+          </a>
+        </li>
+        <li>
+          <a class="nav-item" data-tab="profile">
+            <span class="icon">👤</span>
+            <span>Profile & Hero</span>
+          </a>
+        </li>
+
+        <div class="menu-heading">Portfolio Sections</div>
+        <li>
+          <a class="nav-item" data-tab="projects">
+            <span class="icon">💻</span>
+            <span>Projects</span>
+          </a>
+        </li>
+        <li>
+          <a class="nav-item" data-tab="certs">
+            <span class="icon">📜</span>
+            <span>Certificates</span>
+          </a>
+        </li>
+        <li>
+          <a class="nav-item" data-tab="skills">
+            <span class="icon">⚡</span>
+            <span>Skills</span>
+          </a>
+        </li>
+        <li>
+          <a class="nav-item" data-tab="experience">
+            <span class="icon">💼</span>
+            <span>Experience</span>
+          </a>
+        </li>
+        <li>
+          <a class="nav-item" data-tab="education">
+            <span class="icon">🎓</span>
+            <span>Education</span>
+          </a>
+        </li>
+        <li>
+          <a class="nav-item" data-tab="languages">
+            <span class="icon">🌐</span>
+            <span>Languages</span>
+          </a>
+        </li>
+        <li>
+          <a class="nav-item" data-tab="art">
+            <span class="icon">🎨</span>
+            <span>Art Gallery</span>
+          </a>
+        </li>
+
+        <div class="menu-heading">Communication</div>
+        <li>
+          <a class="nav-item" data-tab="messages">
+            <span class="icon">✉️</span>
+            <span>Inquiries</span>
+            <span class="badge-pill" id="unread-count-badge" style="display:none;">0</span>
+          </a>
+        </li>
+
+        <div class="menu-heading">System</div>
+        <li>
+          <a class="nav-item" data-tab="settings">
+            <span class="icon">⚙️</span>
+            <span>Settings & Sync</span>
+          </a>
+        </li>
+      </ul>
+
+      <div class="sidebar-footer">
+        <div class="admin-user-info">
+          <div class="user-avatar" id="sidebar-avatar">P</div>
+          <div class="user-details">
+            <div class="user-email" id="sidebar-email">Admin</div>
+            <div class="user-role">Administrator</div>
+          </div>
+          <button id="logout-btn-sidebar" class="btn btn-secondary btn-sm" title="Sign Out" style="padding:0.3rem 0.5rem;">
+            🚪
+          </button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="admin-main">
+      <header class="admin-header">
+        <div class="header-left">
+          <button class="menu-toggle-btn" id="menu-toggle" aria-label="Toggle Menu">☰</button>
+          <h2 class="page-title" id="page-title">Dashboard Overview</h2>
+        </div>
+        <div class="header-actions">
+          <a href="index.html" target="_blank" class="btn btn-secondary btn-sm">
+            <span>View Public Portfolio ↗</span>
+          </a>
+          <button id="logout-btn-header" class="btn btn-danger btn-sm">
+            <span>Sign Out</span>
+          </button>
+        </div>
+      </header>
+
+      <div class="admin-content">
+
+        <!-- ════════ TAB: OVERVIEW ════════ -->
+        <div class="tab-pane active" id="tab-overview">
+          <div class="stat-cards-grid">
+            <div class="dashboard-stat-card">
+              <div class="stat-icon-wrapper">💻</div>
+              <div>
+                <div class="stat-val" id="stat-projects-count">0</div>
+                <div class="stat-label">Projects Published</div>
+              </div>
+            </div>
+            <div class="dashboard-stat-card">
+              <div class="stat-icon-wrapper">📜</div>
+              <div>
+                <div class="stat-val" id="stat-certs-count">0</div>
+                <div class="stat-label">Certifications</div>
+              </div>
+            </div>
+            <div class="dashboard-stat-card">
+              <div class="stat-icon-wrapper">🎨</div>
+              <div>
+                <div class="stat-val" id="stat-art-count">0</div>
+                <div class="stat-label">Art Pieces</div>
+              </div>
+            </div>
+            <div class="dashboard-stat-card">
+              <div class="stat-icon-wrapper">✉️</div>
+              <div>
+                <div class="stat-val" id="stat-messages-count">0</div>
+                <div class="stat-label">Contact Inquiries</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Quick Actions & Database Status</h3>
+            </div>
+            <div style="display:flex;gap:1rem;flex-wrap:wrap;align-items:center;">
+              <button class="btn btn-primary" onclick="window.adminApp.openAddModal('project')">+ Add New Project</button>
+              <button class="btn btn-primary" onclick="window.adminApp.openAddModal('certificate')">+ Add Certificate</button>
+              <button class="btn btn-secondary" onclick="window.adminApp.switchTab('messages')">View Messages (<span id="quick-unread-count">0</span> unread)</button>
+              <button class="btn btn-secondary" onclick="window.adminApp.switchTab('settings')">Database Sync Utility</button>
+            </div>
+            <div style="margin-top:1.5rem;padding:1rem;background:rgba(255,255,255,0.02);border-radius:8px;border:1px solid var(--border);display:flex;align-items:center;gap:1rem;">
+              <div style="font-size:1.5rem;">🔥</div>
+              <div style="flex:1;">
+                <div style="font-weight:600;font-size:0.9rem;">Connected to Cloud Firestore</div>
+                <div style="font-size:0.8rem;color:var(--text-sub);">Project: <code class="mono" style="color:var(--cyan);">portfolio-43ffd</code> · Live changes persist immediately</div>
+              </div>
+              <span class="status-pill published">● Online</span>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Recent Contact Form Inquiries</h3>
+              <button class="btn btn-secondary btn-sm" onclick="window.adminApp.switchTab('messages')">View All</button>
+            </div>
+            <div id="overview-recent-messages" style="color:var(--text-sub);font-size:0.9rem;">
+              Loading recent messages...
+            </div>
+          </div>
+        </div>
+
+        <!-- ════════ TAB: PROFILE & ABOUT ════════ -->
+        <div class="tab-pane" id="tab-profile">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Section Visibility Controls</h3>
+              <div class="form-hint">Toggle visibility of sections on the public portfolio</div>
+            </div>
+            <div class="form-grid-3" id="visibility-controls-grid">
+              <!-- Dynamically populated or static toggles -->
+              <label style="display:flex;align-items:center;gap:0.75rem;cursor:pointer;">
+                <input type="checkbox" id="vis-about" checked/> Show About Section
+              </label>
+              <label style="display:flex;align-items:center;gap:0.75rem;cursor:pointer;">
+                <input type="checkbox" id="vis-skills" checked/> Show Skills Section
+              </label>
+              <label style="display:flex;align-items:center;gap:0.75rem;cursor:pointer;">
+                <input type="checkbox" id="vis-projects" checked/> Show Projects Section
+              </label>
+              <label style="display:flex;align-items:center;gap:0.75rem;cursor:pointer;">
+                <input type="checkbox" id="vis-experience" checked/> Show Experience Section
+              </label>
+              <label style="display:flex;align-items:center;gap:0.75rem;cursor:pointer;">
+                <input type="checkbox" id="vis-education" checked/> Show Education Section
+              </label>
+              <label style="display:flex;align-items:center;gap:0.75rem;cursor:pointer;">
+                <input type="checkbox" id="vis-certs" checked/> Show Certifications
+              </label>
+              <label style="display:flex;align-items:center;gap:0.75rem;cursor:pointer;">
+                <input type="checkbox" id="vis-languages" checked/> Show Languages Section
+              </label>
+              <label style="display:flex;align-items:center;gap:0.75rem;cursor:pointer;">
+                <input type="checkbox" id="vis-art" checked/> Show Art Gallery (@art_box_24)
+              </label>
+              <label style="display:flex;align-items:center;gap:0.75rem;cursor:pointer;">
+                <input type="checkbox" id="vis-contact" checked/> Show Contact Section
+              </label>
+            </div>
+          </div>
+
+          <form id="profile-form">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Hero Section Content</h3>
+              </div>
+              <div class="form-grid-2">
+                <div class="form-group">
+                  <label class="form-label">Full Name</label>
+                  <input type="text" id="prof-name" class="form-input" required/>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Hero Tagline / Kicker</label>
+                  <input type="text" id="prof-tagline" class="form-input"/>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Rotating Roles (one per line)</label>
+                <textarea id="prof-roles" class="form-textarea" rows="4"></textarea>
+                <div class="form-hint">These rotate smoothly in the hero headline rotator.</div>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Hero Bio / Description (HTML supported)</label>
+                <textarea id="prof-hero-desc" class="form-textarea" rows="3"></textarea>
+              </div>
+              <div class="form-grid-2">
+                <div class="form-group">
+                  <label class="form-label">Profile Image URL</label>
+                  <input type="text" id="prof-photo-url" class="form-input"/>
+                  <div style="margin-top:0.5rem;display:flex;align-items:center;gap:0.5rem;">
+                    <input type="file" id="prof-photo-file" accept="image/*" style="display:none;"/>
+                    <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('prof-photo-file').click()">Upload Image</button>
+                    <span id="prof-photo-status" class="form-hint"></span>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Resume Download Link / PDF URL</label>
+                  <input type="text" id="prof-resume-url" class="form-input"/>
+                  <div style="margin-top:0.5rem;display:flex;align-items:center;gap:0.5rem;">
+                    <input type="file" id="prof-resume-file" accept="application/pdf" style="display:none;"/>
+                    <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('prof-resume-file').click()">Upload PDF</button>
+                    <span id="prof-resume-status" class="form-hint"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">About Section</h3>
+              </div>
+              <div class="form-group">
+                <label class="form-label">About Paragraphs (separate paragraphs with a blank line)</label>
+                <textarea id="prof-about-paras" class="form-textarea" rows="5"></textarea>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Career Goal Text</label>
+                <input type="text" id="prof-about-goal" class="form-input"/>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Highlight Chips (comma separated)</label>
+                <input type="text" id="prof-about-chips" class="form-input"/>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Contact & Social Links</h3>
+              </div>
+              <div class="form-grid-2">
+                <div class="form-group">
+                  <label class="form-label">Email</label>
+                  <input type="email" id="prof-email" class="form-input"/>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Phone</label>
+                  <input type="text" id="prof-phone" class="form-input"/>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">LinkedIn URL</label>
+                  <input type="url" id="prof-linkedin" class="form-input"/>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">GitHub URL</label>
+                  <input type="url" id="prof-github" class="form-input"/>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Art Instagram URL</label>
+                  <input type="url" id="prof-instagram" class="form-input"/>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Location</label>
+                  <input type="text" id="prof-location" class="form-input"/>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Contact Invitation Blurb</label>
+                <textarea id="prof-contact-blurb" class="form-textarea" rows="2"></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary" style="margin-top:1rem;">
+                <span>Save All Profile Changes ✓</span>
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- ════════ TAB: PROJECTS ════════ -->
+        <div class="tab-pane" id="tab-projects">
+          <div class="action-bar">
+            <div class="search-filter-box">
+              <input type="text" id="project-search" class="form-input" placeholder="Search projects by title, tech..."/>
+              <select id="project-status-filter" class="form-select" style="max-width:160px;">
+                <option value="all">All Status</option>
+                <option value="published">Published</option>
+                <option value="draft">Drafts</option>
+                <option value="ongoing">Ongoing</option>
+                <option value="done">Completed</option>
+              </select>
+            </div>
+            <button class="btn btn-primary" onclick="window.adminApp.openAddModal('project')">+ New Project</button>
+          </div>
+
+          <div class="card" style="padding:0;overflow:hidden;">
+            <div class="table-responsive">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th style="width:50px;">Icon</th>
+                    <th>Title & Type</th>
+                    <th>Technologies</th>
+                    <th>Status</th>
+                    <th>Order</th>
+                    <th>Visibility</th>
+                    <th style="text-align:right;">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="projects-table-body">
+                  <tr><td colspan="7" style="text-align:center;color:var(--text-dim);padding:2rem;">Loading projects...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- ════════ TAB: CERTIFICATES ════════ -->
+        <div class="tab-pane" id="tab-certs">
+          <div class="action-bar">
+            <div class="search-filter-box">
+              <input type="text" id="cert-search" class="form-input" placeholder="Search certificates..."/>
+            </div>
+            <button class="btn btn-primary" onclick="window.adminApp.openAddModal('certificate')">+ New Certificate</button>
+          </div>
+
+          <div class="card" style="padding:0;overflow:hidden;">
+            <div class="table-responsive">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th style="width:50px;">Badge</th>
+                    <th>Certificate Name</th>
+                    <th>Issuing Organization</th>
+                    <th>Issue Date</th>
+                    <th>Credential Link</th>
+                    <th>Order</th>
+                    <th>Status</th>
+                    <th style="text-align:right;">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="certs-table-body">
+                  <tr><td colspan="8" style="text-align:center;color:var(--text-dim);padding:2rem;">Loading certificates...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- ════════ TAB: SKILLS ════════ -->
+        <div class="tab-pane" id="tab-skills">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Technical Skills Management</h3>
+              <button class="btn btn-primary btn-sm" onclick="window.adminApp.saveSkills()">Save Skills Changes ✓</button>
+            </div>
+            <div class="form-grid-2">
+              <div>
+                <h4 style="margin-bottom:0.75rem;color:var(--cyan);font-size:0.95rem;">Programming Languages (Name & %)</h4>
+                <div id="skills-prog-container"></div>
+                <button type="button" class="btn btn-secondary btn-sm" onclick="window.adminApp.addSkillRow('prog')">+ Add Language</button>
+              </div>
+              <div>
+                <h4 style="margin-bottom:0.75rem;color:var(--cyan);font-size:0.95rem;">Data Science & ML (Name & %)</h4>
+                <div id="skills-ml-container"></div>
+                <button type="button" class="btn btn-secondary btn-sm" onclick="window.adminApp.addSkillRow('ml')">+ Add ML Skill</button>
+              </div>
+            </div>
+
+            <div class="form-grid-2" style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--border);">
+              <div>
+                <h4 style="margin-bottom:0.75rem;color:var(--cyan);font-size:0.95rem;">Tools & Platforms (Icon & Name)</h4>
+                <div id="skills-tools-container"></div>
+                <button type="button" class="btn btn-secondary btn-sm" onclick="window.adminApp.addSkillRow('tool')">+ Add Tool</button>
+              </div>
+              <div>
+                <h4 style="margin-bottom:0.75rem;color:var(--cyan);font-size:0.95rem;">Soft Skills (Icon, Name & optional URL)</h4>
+                <div id="skills-soft-container"></div>
+                <button type="button" class="btn btn-secondary btn-sm" onclick="window.adminApp.addSkillRow('soft')">+ Add Soft Skill</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ════════ TAB: EXPERIENCE ════════ -->
+        <div class="tab-pane" id="tab-experience">
+          <div class="action-bar">
+            <div class="card-title" style="margin:0;">Experience & Leadership Timeline</div>
+            <button class="btn btn-primary" onclick="window.adminApp.openAddModal('experience')">+ Add Experience Entry</button>
+          </div>
+
+          <div class="card" style="padding:0;overflow:hidden;">
+            <div class="table-responsive">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Period</th>
+                    <th>Role</th>
+                    <th>Organization</th>
+                    <th>Key Highlights</th>
+                    <th>Order</th>
+                    <th>Status</th>
+                    <th style="text-align:right;">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="experience-table-body">
+                  <tr><td colspan="7" style="text-align:center;color:var(--text-dim);padding:2rem;">Loading experience...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- ════════ TAB: EDUCATION ════════ -->
+        <div class="tab-pane" id="tab-education">
+          <div class="action-bar">
+            <div class="card-title" style="margin:0;">Academic Journey (Education)</div>
+            <button class="btn btn-primary" onclick="window.adminApp.openAddModal('education')">+ Add Education Entry</button>
+          </div>
+
+          <div class="card" style="padding:0;overflow:hidden;">
+            <div class="table-responsive">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th style="width:50px;">Icon</th>
+                    <th>Year Range</th>
+                    <th>Degree / Certificate</th>
+                    <th>Institution</th>
+                    <th>Order</th>
+                    <th>Status</th>
+                    <th style="text-align:right;">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="education-table-body">
+                  <tr><td colspan="7" style="text-align:center;color:var(--text-dim);padding:2rem;">Loading education...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- ════════ TAB: LANGUAGES ════════ -->
+        <div class="tab-pane" id="tab-languages">
+          <div class="action-bar">
+            <div class="card-title" style="margin:0;">Spoken Languages</div>
+            <button class="btn btn-primary" onclick="window.adminApp.openAddModal('language')">+ Add Language</button>
+          </div>
+
+          <div class="card" style="padding:0;overflow:hidden;">
+            <div class="table-responsive">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Language</th>
+                    <th>Proficiency Level</th>
+                    <th>Rating Dots (1-5)</th>
+                    <th>Order</th>
+                    <th>Status</th>
+                    <th style="text-align:right;">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="languages-table-body">
+                  <tr><td colspan="6" style="text-align:center;color:var(--text-dim);padding:2rem;">Loading languages...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- ════════ TAB: ART GALLERY ════════ -->
+        <div class="tab-pane" id="tab-art">
+          <div class="action-bar">
+            <div class="card-title" style="margin:0;">Art Gallery (@art_box_24)</div>
+            <button class="btn btn-primary" onclick="window.adminApp.openAddModal('art')">+ Add Artwork</button>
+          </div>
+
+          <div class="card" style="padding:0;overflow:hidden;">
+            <div class="table-responsive">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th style="width:70px;">Thumbnail</th>
+                    <th>Title</th>
+                    <th>Image URL</th>
+                    <th>Caption</th>
+                    <th>Order</th>
+                    <th>Status</th>
+                    <th style="text-align:right;">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="art-table-body">
+                  <tr><td colspan="7" style="text-align:center;color:var(--text-dim);padding:2rem;">Loading art pieces...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- ════════ TAB: MESSAGES / INBOX ════════ -->
+        <div class="tab-pane" id="tab-messages">
+          <div class="action-bar">
+            <div class="search-filter-box">
+              <input type="text" id="message-search" class="form-input" placeholder="Search inquiries by sender, email, keywords..."/>
+              <select id="message-filter" class="form-select" style="max-width:150px;">
+                <option value="all">All Messages</option>
+                <option value="unread">Unread Only</option>
+                <option value="read">Read</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="card" style="padding:0;overflow:hidden;">
+            <div class="table-responsive">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th style="width:30px;"></th>
+                    <th>Sender Name</th>
+                    <th>Email</th>
+                    <th>Company</th>
+                    <th>Message Snippet</th>
+                    <th>Date Received</th>
+                    <th style="text-align:right;">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="messages-table-body">
+                  <tr><td colspan="7" style="text-align:center;color:var(--text-dim);padding:2rem;">Loading messages...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- ════════ TAB: SETTINGS & DATA SYNC ════════ -->
+        <div class="tab-pane" id="tab-settings">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Initial Data Sync Utility</h3>
+            </div>
+            <p style="color:var(--text-sub);font-size:0.9rem;margin-bottom:1rem;line-height:1.6;">
+              If your Cloud Firestore database is currently empty or you want to populate all default content from the original portfolio files (Projects, Certifications, Experience, Education, Skills, and Profile), click the button below. It safely seeds your Firestore database without overwriting existing entries.
+            </p>
+            <button id="sync-data-btn" class="btn btn-primary" onclick="window.adminApp.syncDefaultData()">
+              <span>⚡ Initialize / Sync Default Data to Firestore</span>
+            </button>
+            <div id="sync-log-box" style="margin-top:1rem;display:none;background:rgba(0,0,0,0.4);border:1px solid var(--border);border-radius:8px;padding:1rem;font-family:'IBM Plex Mono',monospace;font-size:0.8rem;max-height:200px;overflow-y:auto;white-space:pre-wrap;"></div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Authorized Admin Account</h3>
+            </div>
+            <p style="color:var(--text-sub);font-size:0.9rem;margin-bottom:1rem;">
+              Currently configured authorized administrator:
+              <strong style="color:var(--cyan);" id="settings-admin-email">purnashah24@gmail.com</strong>
+            </p>
+            <div style="font-size:0.85rem;color:var(--text-dim);line-height:1.6;">
+              To authorize additional administrator accounts or change this email, update <code class="mono" style="color:var(--cyan)">firebase/admin-config.js</code> and the corresponding rule in <code class="mono" style="color:var(--cyan)">firestore.rules</code>.
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════
+       3. MODALS
+  ════════════════════════════════════════════════════════ -->
+
+  <!-- Universal CRUD Modal -->
+  <div class="modal-backdrop" id="crud-modal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 class="modal-title" id="crud-modal-title">Edit Item</h3>
+        <button class="modal-close-btn" onclick="window.adminApp.closeModal('crud-modal')">✕</button>
+      </div>
+      <div class="modal-body" id="crud-modal-body">
+        <!-- Injected dynamically per entity type -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" onclick="window.adminApp.closeModal('crud-modal')">Cancel</button>
+        <button type="button" class="btn btn-primary" id="crud-modal-save-btn">Save Changes</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Confirm Delete Modal -->
+  <div class="modal-backdrop" id="confirm-modal">
+    <div class="modal-box" style="max-width:420px;">
+      <div class="modal-header">
+        <h3 class="modal-title" style="color:#fca5a5;">Confirm Deletion</h3>
+        <button class="modal-close-btn" onclick="window.adminApp.closeModal('confirm-modal')">✕</button>
+      </div>
+      <div class="modal-body">
+        <p id="confirm-modal-text" style="color:var(--text-sub);font-size:0.9rem;line-height:1.5;">
+          Are you sure you want to delete this item? This action cannot be undone.
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" onclick="window.adminApp.closeModal('confirm-modal')">Cancel</button>
+        <button type="button" class="btn btn-danger" id="confirm-modal-btn">Delete Permanently</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Message Detail Modal -->
+  <div class="modal-backdrop" id="message-detail-modal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 class="modal-title">Contact Inquiry</h3>
+        <button class="modal-close-btn" onclick="window.adminApp.closeModal('message-detail-modal')">✕</button>
+      </div>
+      <div class="modal-body" id="message-detail-body">
+        <!-- Message details injected dynamically -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" onclick="window.adminApp.closeModal('message-detail-modal')">Close</button>
+        <button type="button" class="btn btn-primary" id="message-detail-reply-btn">Reply via Email</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="admin-toast-container"></div>
+
+  <!-- Admin JavaScript Module -->
+  <script type="module" src="js/admin.js"></script>
+</body>
+</html>

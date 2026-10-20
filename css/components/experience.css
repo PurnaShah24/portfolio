@@ -1,0 +1,32 @@
+/* ============================================================
+   EXPERIENCE TIMELINE
+   ============================================================ */
+#experience{background:var(--card);}
+.timeline{position:relative;padding-left:2rem;max-width:800px;margin:0 auto;}
+.timeline::before{
+  content:'';position:absolute;left:.75rem;top:0;bottom:0;
+  width:1px;background:linear-gradient(180deg,var(--blue),var(--cyan),transparent);
+}
+.tl-item{position:relative;margin-bottom:3rem;padding-left:2rem;}
+.tl-dot{
+  position:absolute;left:-2.35rem;top:.3rem;
+  width:14px;height:14px;border-radius:50%;
+  background:linear-gradient(135deg,var(--blue),var(--cyan));
+  box-shadow:0 0 0 4px rgba(37,99,235,.15),0 0 16px rgba(37,99,235,.4);
+}
+.tl-date{
+  font-family:var(--ff-mono);font-size:.72rem;color:var(--cyan);
+  letter-spacing:.1em;text-transform:uppercase;margin-bottom:.4rem;
+}
+.tl-role{font-family:var(--ff-head);font-size:1.1rem;font-weight:700;color:var(--ink);margin-bottom:.2rem;}
+.tl-org{font-size:.83rem;color:var(--blue);font-weight:500;margin-bottom:.8rem;}
+.tl-points{list-style:none;display:flex;flex-direction:column;gap:.5rem;}
+.tl-points li{
+  font-size:.83rem;color:var(--sub);padding-left:1.1rem;position:relative;line-height:1.7;
+}
+.tl-points li::before{
+  content:'→';position:absolute;left:0;color:var(--cyan);font-size:.7rem;top:.1rem;
+}
+.tl-links{display:flex;gap:1rem;margin-top:.9rem;}
+.tl-links a{font-size:.75rem;color:var(--cyan);text-decoration:none;}
+.tl-links a:hover{text-decoration:underline;}

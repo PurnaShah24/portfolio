@@ -1,0 +1,15 @@
+/* ============================================================
+   EDUCATION
+   ============================================================ */
+#education{background:var(--shine);}
+.edu-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;}
+.edu-card{
+  background:var(--card);border:1px solid var(--border);border-radius:var(--r);
+  padding:1.5rem;transition:all var(--transition);
+}
+.edu-card:hover{border-color:var(--cyan);transform:translateY(-4px);}
+.edu-icon{font-size:1.8rem;margin-bottom:.8rem;}
+.edu-year{font-family:var(--ff-mono);font-size:.68rem;color:var(--cyan);
+  letter-spacing:.1em;text-transform:uppercase;margin-bottom:.4rem;}
+.edu-deg{font-family:var(--ff-head);font-size:.95rem;font-weight:700;color:var(--ink);margin-bottom:.3rem;}
+.edu-inst{font-size:.78rem;color:var(--sub);}

@@ -1,0 +1,52 @@
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media(max-width:960px){
+  nav{padding:.9rem 4%;}
+  .nav-links{display:none;}
+  #hero{padding:7rem 4% 4rem;}
+  .hero-grid{grid-template-columns:1fr;gap:3rem;}
+  .hero-visual{display:none;}
+  section{padding:4.5rem 4%;}
+  .about-grid,.contact-grid,.skills-layout{grid-template-columns:1fr;gap:2.5rem;}
+  .proj-grid{grid-template-columns:1fr;}
+  .edu-cards{grid-template-columns:1fr;}
+  .lang-grid{grid-template-columns:repeat(3,1fr);}
+  .cert-grid{grid-template-columns:1fr;}
+  .form-grid-2{grid-template-columns:1fr;}
+  footer .footer-inner{flex-direction:column;text-align:center;}
+}
+
+/* ============================================================
+   MOBILE HAMBURGER
+   ============================================================ */
+.hamburger{
+  display:none;flex-direction:column;gap:5px;
+  padding:.4rem;
+}
+.hamburger span{
+  width:22px;height:2px;background:var(--ink);border-radius:99px;
+  transition:all var(--transition);transform-origin:center;
+}
+.hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px);}
+.hamburger.open span:nth-child(2){opacity:0;}
+.hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px);}
+
+.mobile-menu{
+  position:fixed;top:0;left:0;right:0;bottom:0;z-index:400;
+  background:var(--bg);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:2.5rem;
+  transform:translateX(100%);transition:transform .4s cubic-bezier(.4,0,.2,1);
+}
+.mobile-menu.open{transform:none;}
+.mobile-menu a{
+  font-family:'Sora',sans-serif;font-size:2rem;font-weight:700;color:var(--ink);
+  letter-spacing:-.03em;transition:color var(--transition);
+}
+.mobile-menu a:hover{color:var(--cyan);}
+
+@media(max-width:960px){
+  .hamburger{display:flex;}
+  .nav-hire{display:none;}
+}

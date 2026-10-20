@@ -1,0 +1,20 @@
+/* ============================================================
+   LOADER
+   ============================================================ */
+#loader{
+  position:fixed;inset:0;z-index:9999;
+  background:var(--bg-dark);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  transition:opacity .6s ease,visibility .6s;
+}
+#loader.hide{opacity:0;visibility:hidden;}
+.loader-logo{
+  font-family:'Sora',sans-serif;font-size:2rem;font-weight:800;
+  background:linear-gradient(135deg,#2563EB,#38BDF8);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  margin-bottom:1.5rem;letter-spacing:-.04em;
+}
+.loader-bar-track{width:200px;height:2px;background:rgba(255,255,255,.08);border-radius:99px;overflow:hidden;}
+.loader-bar-fill{height:100%;width:0%;background:linear-gradient(90deg,#2563EB,#38BDF8);
+  border-radius:99px;transition:width .05s linear;}
+.loader-pct{font-family:'IBM Plex Mono',monospace;font-size:.75rem;color:#38BDF8;margin-top:.8rem;}

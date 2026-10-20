@@ -1,0 +1,28 @@
+/* ============================================================
+   CREATIVE CORNER
+   ============================================================ */
+#creative{background:var(--card);}
+.creative-inner{
+  background:linear-gradient(135deg,rgba(37,99,235,.08),rgba(56,189,248,.05));
+  border:1px solid rgba(56,189,248,.15);border-radius:var(--r-lg);
+  padding:3rem;text-align:center;
+}
+.insta-btn{
+  display:inline-flex;align-items:center;gap:.7rem;
+  background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045);
+  color:#fff;padding:.8rem 2rem;border-radius:10px;
+  font-weight:700;font-size:.9rem;margin-top:2rem;
+  transition:all var(--transition);
+  box-shadow:0 4px 24px rgba(131,58,180,.35);
+}
+.insta-btn:hover{transform:translateY(-3px);box-shadow:0 8px 40px rgba(131,58,180,.5);}
+.art-preview{
+  display:flex;justify-content:center;flex-wrap:wrap;gap:1rem;margin-top:2rem;
+}
+.art-block{
+  width:120px;height:120px;border-radius:12px;
+  background:var(--bg);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;font-size:2.5rem;
+  transition:all var(--transition);
+}
+.art-block:hover{border-color:var(--cyan);transform:scale(1.05);}

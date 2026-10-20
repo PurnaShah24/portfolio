@@ -1,0 +1,96 @@
+/* ============================================================
+   CONTACT
+   ============================================================ */
+#contact{}
+.contact-grid{display:grid;grid-template-columns:1fr 1.3fr;gap:5rem;align-items:start;}
+.contact-card{
+  background:var(--glass);backdrop-filter:blur(20px);
+  border:1px solid var(--border);border-radius:var(--r-lg);padding:2rem;
+  box-shadow:0 8px 40px rgba(0,0,0,.15);
+}
+.contact-card p{font-size:.85rem;color:var(--sub);line-height:1.9;margin-bottom:2rem;}
+.c-links{display:flex;flex-direction:column;gap:.7rem;}
+.c-link{
+  display:flex;align-items:center;gap:.9rem;
+  padding:.85rem 1.1rem;background:var(--card);
+  border:1px solid var(--border);border-radius:10px;
+  font-size:.82rem;color:var(--sub);
+  transition:all var(--transition);
+}
+.c-link:hover{border-color:var(--cyan);color:var(--ink);transform:translateX(5px);}
+.c-link-icon{font-size:1.1rem;flex-shrink:0;}
+
+.contact-form{display:flex;flex-direction:column;gap:.9rem;}
+.fg label{display:block;font-size:.68rem;color:var(--sub);
+  letter-spacing:.1em;text-transform:uppercase;margin-bottom:.4rem;}
+.fg input,.fg textarea{
+  width:100%;background:var(--card);border:1px solid var(--border);
+  border-radius:10px;padding:.85rem 1.1rem;color:var(--ink);
+  font-family:var(--ff-body);font-size:.85rem;outline:none;
+  transition:all var(--transition);resize:vertical;
+}
+.fg textarea{min-height:120px;}
+.fg input:focus,.fg textarea:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(37,99,235,.1);}
+.form-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:.9rem;}
+.cf-btn{
+  background:linear-gradient(135deg,var(--blue),#1d4ed8);
+  color:#fff;padding:.85rem 2.4rem;border-radius:10px;
+  font-family:var(--ff-head);font-weight:700;font-size:.88rem;
+  align-self:flex-start;transition:all var(--transition);
+  box-shadow:0 4px 20px rgba(37,99,235,.3);
+}
+.cf-btn:hover{transform:translateY(-2px);box-shadow:0 8px 36px rgba(37,99,235,.5);}
+.cf-status{font-size:.75rem;margin-top:.4rem;min-height:1rem;}
+
+/* ============================================================
+   GITHUB CARD
+   ============================================================ */
+#github{background:var(--shine);}
+.github-card{
+  background:var(--card);border:1px solid var(--border);border-radius:var(--r-lg);
+  padding:2.5rem;max-width:800px;margin:0 auto;text-align:center;
+  transition:all var(--transition);
+}
+.github-card:hover{border-color:var(--blue);}
+.gh-username{
+  font-family:'Sora',sans-serif;font-size:1.5rem;font-weight:800;
+  color:var(--ink);margin-bottom:.4rem;
+}
+.gh-bio{font-size:.88rem;color:var(--sub);margin-bottom:2rem;}
+.gh-stats{display:flex;justify-content:center;gap:3rem;margin-bottom:2rem;}
+.gh-stat-n{font-family:'Sora',sans-serif;font-size:1.6rem;font-weight:800;
+  background:linear-gradient(135deg,#2563EB,#38BDF8);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.gh-stat-l{font-size:.68rem;color:var(--sub);letter-spacing:.1em;text-transform:uppercase;margin-top:.2rem;}
+.gh-btn{
+  display:inline-flex;align-items:center;gap:.6rem;
+  background:var(--bg);border:1.5px solid var(--border);
+  color:var(--ink);padding:.75rem 2rem;border-radius:10px;
+  font-weight:600;font-size:.85rem;transition:all var(--transition);
+}
+.gh-btn:hover{border-color:var(--cyan);color:var(--cyan);}
+.gh-contrib{
+  font-family:'IBM Plex Mono',monospace;font-size:.7rem;
+  color:var(--sub);margin-bottom:1.5rem;line-height:2;
+  display:flex;flex-wrap:wrap;justify-content:center;gap:3px;
+}
+.gh-day{
+  width:12px;height:12px;border-radius:2px;
+  display:inline-block;
+}
+
+/* ============================================================
+   LANGUAGES
+   ============================================================ */
+#languages{background:var(--shine);}
+.lang-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1rem;}
+.lang-card{
+  background:var(--card);border:1px solid var(--border);border-radius:var(--r);
+  padding:1.3rem;text-align:center;transition:all var(--transition);
+}
+.lang-card:hover{border-color:var(--cyan);}
+.lang-name{font-family:var(--ff-head);font-size:.92rem;font-weight:700;color:var(--ink);margin-bottom:.3rem;}
+.lang-level{font-size:.7rem;color:var(--sub);letter-spacing:.06em;}
+.lang-dots{display:flex;justify-content:center;gap:3px;margin-top:.6rem;}
+.lang-dot{width:8px;height:8px;border-radius:50%;background:var(--border);}
+.lang-dot.on{background:linear-gradient(135deg,var(--blue),var(--cyan));}
